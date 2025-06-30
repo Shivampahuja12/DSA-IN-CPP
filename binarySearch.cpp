@@ -12,8 +12,17 @@ using namespace std;
     if target is less than mid then search in left and take hi to (mid-1)th index
     return middle index if element is found
 
+
     Q. WHAT IS BINARY SEARCH ?
     -> BINARY SEARCH IS AN OPTIMISED AND FAST SEARCHING ALGORITHM WITH SEARCH THE ELEMENT IN log(n) COMPARISONS (WORKS ON SORTED ARRAY ).
+
+
+    IN ALGORITHM HEADER FILE
+    THERE ARE BUILT-IN FUNCTIONS OF BOTH
+    1. FIRST OCCURANCE - LOWER BOUND
+    2. LAST OCCURANCE - UPPER BOUND
+
+
 */
 
 int binarySearch(vector<int> a, int target){
@@ -71,6 +80,60 @@ int lastOccurance(vector<int> a, int target){
     }
     return ans;
 }
+int findLastMissing(vector<int> a){
+    int lo = 0;
+    int hi = a.size()-1;
+    int mid;
+    int ans;
+    while (lo<=hi){
+        mid = lo + (hi-lo)/2;
+        if (a[mid] == mid+1){
+            lo = mid + 1;
+        }
+        else {
+            hi = mid - 1;
+            ans = a[mid];
+        }
+    }
+    return ans-1;
+}
+int findFirstMissing(vector<int> a){
+    int lo = 0;
+    int hi = a.size()-1;
+    int mid;
+    int ans;
+    while (lo<=hi){
+        mid = lo + (hi-lo)/2;
+        if (a[mid] == mid+1){
+            lo = mid + 1;
+            ans = a[mid];
+        }
+        else {
+            hi = mid - 1;
+        }
+    }
+    return ans+1;
+}
+int missingNumber(vector<int> a){
+    int lo = 0;
+    int hi = a.size()-1;
+    int mid;
+    int ans;
+    while (lo<=hi){
+        mid = lo + (hi-lo)/2;
+        if (a[mid] == mid){
+            lo = mid + 1;
+            ans = a[mid];
+        }
+        else {
+            hi = mid - 1;
+        }
+    }
+    return ans+1;
+}
+
+
+
 
 int main(){
 
@@ -82,6 +145,8 @@ int main(){
     if (index == -1) cout << "Target not found" << endl;
     else cout << "Target Found at " << index << "th index" << endl; */
 
+
+    
     /* // ADD ALGORITHM HEADER FILE. 
     // using binary search STL function in vectors
     if (binary_search(v.begin(), v.end(), 3)) cout << "found!\n"; 
@@ -92,18 +157,38 @@ int main(){
     else cout << "not found.\n"; */
 
 
-    /* vector <int> v = {1,3,4,4,4,4,4,6,6,7, 9};
-    int target = 4;
+    /* vector <int> v = {1,3,4,4,4,4,4,4,4,4,4,4,4,6,6,7, 9};
+    int target = 6;
 
     int first = firstOccurance(v, target);
 
     int last = lastOccurance(v, target);
-
+    
     if (first == -1) cout << "(First Occurance) Element not found" << endl;
     else cout << "(First Occurance) Element found at index " << first << endl;
 
     if (last == -1) cout << "(Last Occurance) Element not found" << endl;
-    else cout << "(Last Occurance) Element found at index " << last << endl; */
-    
+    else cout << "(Last Occurance) Element found at index " << last << endl;
+
+    if (first == -1 && last == -1) cout << "Total occurance of " << target << " is " << 0 << endl;
+    else cout << "Total Occurances of " << target << " are " << last - first + 1 << endl; */
+
+
+    /* // BUILT-IN (FIRST OCCURANCE AND LAST OCCURANCE)
+    auto first = lower_bound (v.begin(), v.end(), target); 
+    auto last = upper_bound (v.begin(), v.end(), target);
+
+    if (first-v.begin() == -1) cout << "(First Occurance) Element not found" << endl;
+    else cout << "(First Occurance) Element found at index " << first-v.begin() << endl;
+
+    if (last-v.begin() == -1) cout << "(Last Occurance) Element not found" << endl;
+    else cout << "(Last Occurance) Element found at index " << last-v.begin() << endl; */
+
+
+
+    // FIND MISSING ELEMENT
+    vector<int> v = {1,2,3,5};
+    // cout << "Last Missing element is: " << findLastMissing(v) << endl;  // wrong output
+    cout << "First Missing element is: " << findFirstMissing(v) << endl;
     return 0;
 } 

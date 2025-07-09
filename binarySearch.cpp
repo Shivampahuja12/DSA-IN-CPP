@@ -1,6 +1,7 @@
 #include<iostream>
 #include<algorithm>
 #include<vector>
+#include<numeric>
 using namespace std;
 /* 
     BINARY SEARCH ALGORITHM
@@ -131,8 +132,94 @@ int missingNumber(vector<int> a){
     }
     return ans+1;
 }
+int sqRootBinarySearch(int n){
+    vector<int> v((n/2)+1);
+    iota(v.begin(), v.end(), 0);
+    for (int i: v){
+        cout << i << " ";
+    }
+
+    cout << endl;
+
+    int lo = 0;
+    int hi = v.size()-1;
+
+    int mid;
+    int ans = -1;
+    while (lo<=hi){
+        mid = lo + (hi-lo)/2;
+        if (v[mid] * v[mid] > n){
+            hi = mid-1;
+        }
+        else {
+            ans = v[mid];
+            lo = mid + 1;
+        }
+    }
+    return ans;
+
+}
+double sqrtPrecision(int n, int prec){
+    vector<int> v((n/2)+1);
+    iota(v.begin(), v.end(), 0);
+    for (int i: v){
+        cout << i << " ";
+    }
+
+    cout << endl;
+
+    int lo = 0;
+    int hi = v.size()-1;
+
+    int mid;
+    int ans = -1;
+    while (lo<=hi){
+        mid = lo + (hi-lo)/2;
+        if (v[mid] * v[mid] > n){
+            hi = mid-1;
+        }
+        else {
+            ans = v[mid];
+            lo = mid + 1;
+        }
+    }
 
 
+    double step = 0.1;
+    double finalAns = ans;
+    for (int i=0; i<prec; i++){
+        for (double j=ans; j*j <= n; j=j+step){
+            finalAns = j;
+        }
+        step = step/10; 
+    }
+
+    return finalAns;
+
+}
+bool searchIn2D(vector<vector<int>> a, int target){
+
+    // a.size - number of rows
+    // a[0].size - number of columns
+    int col = a[0].size();
+    int row = a.size();
+    int lo = 0;
+    int hi = row * col - 1;
+    int mid;
+    int ans = -1;
+    while (lo<=hi){
+        mid = lo + (hi-lo)/2;  
+        int rowIndex = mid/col;
+        int colIndex = mid % col;
+        if (a[rowIndex][colIndex] == target){
+            cout << "Element found at " << rowIndex << " " << colIndex << endl;
+            return true;
+        } 
+        else if (a[rowIndex][colIndex] > target) hi = mid -1;
+        else if (a[rowIndex][colIndex] < target) lo = mid+1;
+    }
+    return false;
+}
 
 
 int main(){
@@ -186,9 +273,37 @@ int main(){
 
 
 
-    // FIND MISSING ELEMENT
+    /* // FIND MISSING ELEMENT
     vector<int> v = {1,2,3,5};
     // cout << "Last Missing element is: " << findLastMissing(v) << endl;  // wrong output
     cout << "First Missing element is: " << findFirstMissing(v) << endl;
-    return 0;
+    return 0; */
+
+
+    
+    /* // square root using binary search
+    int num = 3;
+    cout << sqRootBinarySearch(num) << endl; */
+
+
+    /* // square root with precision (upto 5 decimal points)
+    int num = 3;
+    int precision = 5;
+    cout << sqrtPrecision(num, precision) << endl; */
+
+
+    // binary search on 2-D matrix
+    // in 2d matrix, s=0, e = r*c -1
+    // if we know i, j then we can find the index of the element where it is stored linearly -> c * i+j;
+    // if we know the index of the element and then we have to find the row number and column number then we use rowIndex = mid/cols, colIndex = mid % cols;
+    vector<vector<int>> v = {{1,2,3,4}, {5,6,7,8}, {9, 10, 11, 12}, {13, 14, 15, 16}, {17, 18, 19, 20}};
+    int target = 12;
+    cout << searchIn2D(v, target) << endl;
+
+
+    // pivot element
+    // search in rotated sorted array
+    // search in a nearly sorted array in log time
+    // division of 2 no. using binary search
+    // find odd occuring element using binary search
 } 

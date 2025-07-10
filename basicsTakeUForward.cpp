@@ -163,9 +163,30 @@ bool isHappy(int n) {
             func = digitSum(kuchBhi);
         }
         return func == 1;
+}
+int nextPrime(int n){
+
+    vector<int> v;
+    for (int i=1; i<=600; i++){
+        bool flag = true;
+        for (int j=2; j*j<=i; j++){
+            if (i%j==0){
+                flag = false;
+                break;
+            }
+        }
+        if (flag) v.push_back(i);
     }
-vector<int> findDisappearedNumbers(vector<int>& nums) {
     
+    for (int i=0; i<v.size(); i++){
+        cout << v[i] << " ";
+    }
+
+    for (int i=0; i<v.size(); i++){
+        if (v[i] >= n){
+            return v[i];
+        }
+    }
 }
 
 
@@ -247,12 +268,8 @@ int main()
     cout << isHappy(n) << endl; */
 
 
-    // find-all-numbers-disappeared-in-an-array
-    vector<int> v = {4,3,2,7,8,2,3,1};
-    vector<int> a = findDisappearedNumbers(v);
-    for (int i=0; i<a.size(); i++){
-        cout << a[i] << " ";
-    }
-
+    // find the next prime
+    int num = 15;
+    cout << nextPrime(num) << endl;
 
 }

@@ -1,6 +1,8 @@
 #include<iostream>
 #include<vector>
+#include<string>
 using namespace std;
+
 // RECURSION - FUNCTION CALLING ITSELF
 /*  
 
@@ -11,6 +13,7 @@ using namespace std;
         2. RECURSIVE RELATION
         3. PROCESSING
 */
+
 void recursion(int n){
     if (n==0) return;
     cout << "Hello" << endl;
@@ -87,12 +90,37 @@ bool keyPresent(string s, int n, int i, char key){
     if (s[i] == key) return true;
     return keyPresent(s, n, i+1, key);
 }
+int freq(string s, int n, int i, char key, int& count){
+    if (i>=n) return count;
+    if (s[i] == key) count++;
+    return freq(s, n, i+1, key, count);
+}
+void printDigit(int n){
+    if (n==0){
+        return;
+    }
+    printDigit(n/10);
+    cout << n%10 << " ";
+}
+bool isArraySorted(vector<int>& a, int n, int i){
+    if (i>=n-1) return true;
+    if (a[i] > a[i+1]) return false;
+    return isArraySorted(a, n, i+1);
+}
+int binarySearch(vector<int>& a, int& lo, int& hi, int& target){
+    int mid = lo+(hi-lo)/2;
+    if (a[mid] == target) return mid;
+    if (a[mid] > target) hi = mid-1;
+    if (a[mid] < target) lo = mid+1;
+    return binarySearch(a, lo, hi, target);
+}
+
 
 int main(){
-    /* 
-    // print using recursion
+    /* // print using recursion
     int n = 10;
     recursion(n); */
+
 
     /* // factorial
     int n = 10;
@@ -103,19 +131,21 @@ int main(){
     int n = 5;
     countReverse(n); */
 
+
     /* // counting 
     int n=10;
     count(n); */
+
 
     /* // fibo
     int n=10;
     cout << fibo(n) << endl; */
 
 
-
     /* // climbing stairs  -- dry run
     int n=3;
     cout << climbingStairs(n) << endl; */
+
 
     /* // print array elements
     vector<int> v = {10, 20, 30, 40 ,50, 60, 70, 80, 90, 100};
@@ -141,6 +171,7 @@ int main(){
     int b = 6;
     cout << powerRec(a, b) << endl; */
 
+
     /* // minimum element in the array
     int a[] = {76,32,56,123, -10,77, -1,54, 11};
     int size = sizeof(a)/sizeof(int);
@@ -154,29 +185,32 @@ int main(){
     int i=0;
     char key = 'm';
     cout << keyPresent(s, s.size(), i, key) << endl; */
+    
+
+    /* // frequency of any key
+    string s = "shivampahuja";
+    int i=0;
+    int count =0;
+    char key = 'a';
+    cout << freq(s, s.size(), i, key, count) << endl; */
 
 
+    /* // print digits of a number
+    int n = 000647;
+    printDigit(n); */
+    
+
+    /* // array is sorted or not
+    vector<int> v = {1,1,1,1,1};
+    int i=0;
+    cout << isArraySorted(v, v.size(), i) << endl; */
 
 
-
-
+    // binary search using recursion.
+    vector<int> v = {1,2,3,5,65,87,99,123,345,546,888};
+    int lo = 0;
+    int hi = v.size()-1;
+    int target = 99;
+    cout << binarySearch(v, lo, hi, target);
 
 }
-
-
-
-
-/* 
-    power of two
-    5.climb stairs
-    6.print digits of a number
-    7.maximum in array
-    8.minimum in array
-    9.search in array 
-    10.count of searched element in the array
-    11. 10th and then print the index
-*/
-
-
-
-

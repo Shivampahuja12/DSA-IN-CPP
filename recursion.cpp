@@ -109,10 +109,25 @@ bool isArraySorted(vector<int>& a, int n, int i){
 }
 int binarySearch(vector<int>& a, int& lo, int& hi, int& target){
     int mid = lo+(hi-lo)/2;
+    if (lo>hi) return -1;
     if (a[mid] == target) return mid;
     if (a[mid] > target) hi = mid-1;
     if (a[mid] < target) lo = mid+1;
     return binarySearch(a, lo, hi, target);
+}
+void printSubsequences(string s, string output, int i){     // dry run
+    // base case
+    if (i>=s.size()){
+        cout << output << endl;
+        return;
+    }
+
+    // exclude - 1st
+    printSubsequences(s, output, i+1);
+
+    // include - 2nd
+    output.push_back(s[i]);
+    printSubsequences(s, output, i+1);
 }
 
 
@@ -206,11 +221,28 @@ int main(){
     cout << isArraySorted(v, v.size(), i) << endl; */
 
 
-    // binary search using recursion.
+    /* // binary search using recursion.
     vector<int> v = {1,2,3,5,65,87,99,123,345,546,888};
     int lo = 0;
     int hi = v.size()-1;
-    int target = 99;
-    cout << binarySearch(v, lo, hi, target);
+    int target = 65;
+    cout << binarySearch(v, lo, hi, target) << endl; */
+    
+
+    /* // (include . exclude) pattern
+    // subsequences of a string     // dry run
+    string s = "1234";
+    string output = "";
+    int i=0;
+    printSubsequences(s, output, i); */
+
+    /* 
+        printSubsequences with bitmasking
+        
+    */
+
+
+
+    
 
 }

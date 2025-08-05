@@ -305,5 +305,5 @@ int main(){
     // search in rotated sorted array
     // search in a nearly sorted array in log time
     // division of 2 no. using binary search
-    // find odd occuring element using binary search
+    // find odd occuring element using binary search    
 } 

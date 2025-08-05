@@ -41,4 +41,5 @@
 
     obj.member1 // For data members
     obj.member2(..) // For functions
+    
 #### There obj is the name of the object of the given class, member1 is data member and member2 is member function.

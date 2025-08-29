@@ -129,7 +129,10 @@ void printSubsequences(string s, string output, int i){     // dry run
     output.push_back(s[i]);
     printSubsequences(s, output, i+1);
 }
-
+int binaryUsingRec(int n){
+    if (n==0) return 0;
+    return (n%2) + 10 * binaryUsingRec(n/2);
+}
 
 int main(){
     /* // print using recursion
@@ -236,12 +239,15 @@ int main(){
     int i=0;
     printSubsequences(s, output, i); */
 
+    
     /* 
         printSubsequences with bitmasking
         
     */
 
 
+    /* // binary equivalent
+    cout << binaryUsingRec(43) << endl; */
 
     
 

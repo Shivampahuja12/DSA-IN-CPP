@@ -16,6 +16,11 @@ vector<int> unionNoDup(vector<int> &a, vector<int> &b){
 }
 
 vector<int> bruteUnionOfTwoArrays(vector<int> a, vector<int> b){
+    /* 
+        Time complexity: O(n1 + n2)
+        Space complexity: O(n1 + n2)
+    */
+
     int n1 = a.size();
     int n2 = b.size();
     set<int> st;
@@ -34,6 +39,11 @@ vector<int> bruteUnionOfTwoArrays(vector<int> a, vector<int> b){
 }
 
 vector<int> optimalUnionOfTwoArrays(vector<int> a, vector<int> b){
+
+    /* 
+        TC - O(n1 + n2)
+        SC - O(n1 + n2) only for return not to do any operation
+    */
     int n1 = a.size();
     int n2 = b.size();
     int i=0;
